@@ -1,0 +1,60 @@
+﻿<Window x:Class="Pilkarze.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pilkarze"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.35*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="Imię:"/>
+                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="Nazwisko:"/>
+                <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="Wiek:"/>
+                <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="Waga:"/>
+                <TextBox x:Name="Name_tb" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Podaj imię" Foreground="Gray" Width="120" GotFocus="Name_tb_GotFocus" LostFocus="Name_tb_LostFocus" MaxLength="17" TextChanged="TextBox_TextChanged"/>
+                <TextBox x:Name="LastName_tb" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Text="Podaj nazwisko" Foreground="Gray" Width="120" GotFocus="LastName_tb_GotFocus" LostFocus="LastName_tb_LostFocus" MaxLength="17" TextChanged="TextBox_TextChanged"/>
+                <ComboBox x:Name="Age_cb" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Width="60" SelectedIndex="0"/>
+                <Slider x:Name="Weight_s" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Minimum="55" Maximum="100" TickFrequency="0.1" IsSnapToTickEnabled="True" ValueChanged="Weight_s_ValueChanged"/>
+                <Label x:Name="Weight_l" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Content="55,0 kg"/>
+            </Grid>
+            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+                <Button x:Name="Add_btn" Margin="5" Content="Dodaj" Width="75" Click="Add_btn_Click"/>
+                <Button x:Name="Modify_btn" Margin="5" Content="Modyfikuj" Width="75" IsEnabled="False" Click="Modify_btn_Click"/>
+                <Button x:Name="Delete_btn" Margin="5" Content="Usuń" Width="75" Click="Delete_btn_Click"/>
+            </StackPanel>
+        </Grid>
+        <ListBox x:Name="Team_lb" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding FullInfo}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListBoxItem_PreviewMouseLeftButtonDown" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
+</Window>
